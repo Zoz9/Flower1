@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Flower1</string>
+    <string name="stand_fl">Стандарт</string>
+    <string name="mini_fl">Мини</string>
+    <string name="trailer_fl">Трейлеры</string>
+
+</resources>
