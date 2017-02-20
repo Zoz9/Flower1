@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:weightSum="1">
 
     <LinearLayout
@@ -21,14 +21,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="194dp"
-            android:layout_height="276dp"
+            android:layout_height="match_parent"
             android:weightSum="1">
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -43,29 +37,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editText5" />
-
-            <ExpandableListView
-                android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:headerDividersEnabled="false"
-                android:layout_weight="0.16" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:ems="10"
-                android:id="@+id/editText6" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:ems="10"
-                android:id="@+id/editText7" />
+                android:id="@+id/editText5"
+                android:text="размер" />
 
         </LinearLayout>
 
@@ -73,16 +46,53 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="190dp"
-        android:layout_height="151dp">
+        android:layout_width="match_parent"
+        android:layout_height="134dp"
+        android:weightSum="1">
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="191dp"
             android:layout_height="match_parent"
             android:inputType="textPersonName"
-            android:text="Name"
+            android:text="описание"
             android:ems="10"
-            android:id="@+id/editText8" />
+            android:id="@+id/editText8"
+            android:selectAllOnFocus="false" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.02">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Селекционер"
+                android:ems="10"
+                android:id="@+id/editText7"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Коллекционер"
+                android:ems="10"
+                android:id="@+id/editText6"
+                android:layout_weight="1" />
+
+            <ExpandableListView
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:headerDividersEnabled="false"
+                android:footerDividersEnabled="false" />
+
+            <!--  выбор стадии роста -->
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

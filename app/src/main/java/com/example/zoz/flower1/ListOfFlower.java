@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -13,12 +14,12 @@ import android.widget.ListView;
  * Created by Zoz on 28.01.2017.
  */
 
-public class ListOfFlower extends Activity implements View.OnClickListener {
+public class ListOfFlower extends AppCompatActivity implements View.OnClickListener {
 
     BDSupport bdSupport;
     ArrayAdapter<CatalogFlower> myOjctFlower;
     FAdapterList fAdapterList;
-
+    String flowerBD;
     SQLiteDatabase db;
 
     @Override
@@ -52,9 +53,9 @@ public class ListOfFlower extends Activity implements View.OnClickListener {
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.button4:
+            case R.id.buttonCreateFlower:
                 Intent intent = new Intent(this, FlowerEditor.class);
-                intent.putExtra("bdname", "flowersstandartdb");
+                intent.putExtra("bdname", flowerBD);
                 startActivity(intent);
         }
     }
