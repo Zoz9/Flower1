@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 /**
@@ -21,6 +22,7 @@ public class ListOfFlower extends AppCompatActivity implements View.OnClickListe
     FAdapterList fAdapterList;
     String flowerBD;
     SQLiteDatabase db;
+    Button buttonCreateFlower;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class ListOfFlower extends AppCompatActivity implements View.OnClickListe
         String flowerBD = intent.getStringExtra("bdname");
         bdSupport = new BDSupport(this,flowerBD,1);
         db = bdSupport.getReadableDatabase();
+        buttonCreateFlower = (Button) findViewById(R.id.buttonCreateFlower);
+        buttonCreateFlower.setOnClickListener(this);
 
         Cursor c = db.query(flowerBD, null, null, null, null, null, null);
 
