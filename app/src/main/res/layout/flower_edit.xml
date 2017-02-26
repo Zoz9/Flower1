@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:weightSum="1">
@@ -37,8 +38,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editText5"
-                android:text="размер" />
+                android:id="@+id/eTsizeFlower"
+                android:text="0" />
 
         </LinearLayout>
 
@@ -56,7 +57,7 @@
             android:inputType="textPersonName"
             android:text="описание"
             android:ems="10"
-            android:id="@+id/editText8"
+            android:id="@+id/eTfeaturesFlower"
             android:selectAllOnFocus="false" />
 
         <LinearLayout
@@ -71,7 +72,7 @@
                 android:inputType="textPersonName"
                 android:text="Селекционер"
                 android:ems="10"
-                android:id="@+id/editText7"
+                android:id="@+id/eTmanufacturerFlower"
                 android:layout_weight="1" />
 
             <EditText
@@ -80,15 +81,16 @@
                 android:inputType="textPersonName"
                 android:text="Коллекционер"
                 android:ems="10"
-                android:id="@+id/editText6"
+                android:id="@+id/eTcollectorFlowerFlower"
                 android:layout_weight="1" />
 
-            <ExpandableListView
+            <Spinner
 
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:headerDividersEnabled="false"
-                android:footerDividersEnabled="false" />
+                android:footerDividersEnabled="false"
+                android:id="@+id/lWgrowthStageFlower" />
 
             <!--  выбор стадии роста -->
         </LinearLayout>
