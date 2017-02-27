@@ -48,6 +48,9 @@ public class FlowerEditor extends Activity implements View.OnClickListener {
         butSaveFl = (Button)findViewById(R.id.butSaveFl);
         butSaveFl.setOnClickListener(this);
 
+        Button drop;
+        drop = (Button) findViewById(R.id.drop);
+        drop.setOnClickListener(this);
 
         eTnameFlower = (EditText) findViewById(R.id.eTnameFlower);
         eTsizeFlower = (EditText) findViewById(R.id.eTsizeFlower);
@@ -102,10 +105,15 @@ public class FlowerEditor extends Activity implements View.OnClickListener {
                 cv.put("collectorFlower", collectorFlower);
                 String featuresFlower = eTfeaturesFlower.getText().toString();
                 cv.put("featuresFlower", featuresFlower);
-                long rowID = db.insert(flowerBD, "COLUMN_NAME_NULLABLE", cv);
+                long rowID = db.insert(flowerBD, null, cv);
                 Log.d("TAGN", "row inserted, ID = " + rowID);
+                break;
 
+            case R.id.drop:
 
+                db.execSQL("DROP TABLE IF EXISTS flowersstandartdb");
+                db.execSQL("CREATE TABLE flowersstandartdb (id INTEGER PRIMARY KEY autoincrement, nameFlower TEXT, sizeFlower INTEGER, growthStageFlower TEXT, manufacturerFlower TEXT, collectorFlower TEXT, featuresFlower TEXT);");
+                break;
 
         }
     }

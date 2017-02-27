@@ -104,4 +104,11 @@
         android:id="@+id/butSaveFl"
         android:layout_weight="0.16" />
 
+    <Button
+        android:text="drop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/drop"
+        android:layout_weight="0.16" />
+
 </LinearLayout>

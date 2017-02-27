@@ -31,7 +31,7 @@ public class ListOfFlower extends AppCompatActivity implements View.OnClickListe
 
         Intent intent = getIntent();
 
-        String flowerBD = intent.getStringExtra("bdname");
+        flowerBD = intent.getStringExtra("bdname");
         bdSupport = new BDSupport(this,flowerBD,1);
         db = bdSupport.getReadableDatabase();
         buttonCreateFlower = (Button) findViewById(R.id.buttonCreateFlower);
@@ -59,8 +59,10 @@ public class ListOfFlower extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.buttonCreateFlower:
                 Intent intent = new Intent(this, FlowerEditor.class);
-                intent.putExtra("bdname", flowerBD);
+                intent.putExtra("bdname", flowerBD+"");
                 startActivity(intent);
+
+
         }
     }
 }
