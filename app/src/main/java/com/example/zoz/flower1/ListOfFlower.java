@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zoz on 28.01.2017.
@@ -18,7 +22,7 @@ import android.widget.ListView;
 public class ListOfFlower extends AppCompatActivity implements View.OnClickListener {
 
     BDSupport bdSupport;
-    ArrayAdapter<CatalogFlower> myOjctFlower;
+    ArrayList<CatalogFlower> myOjctFlower = new ArrayList<CatalogFlower>();
     FAdapterList fAdapterList;
     String flowerBD;
     SQLiteDatabase db;
@@ -36,15 +40,19 @@ public class ListOfFlower extends AppCompatActivity implements View.OnClickListe
         db = bdSupport.getReadableDatabase();
         buttonCreateFlower = (Button) findViewById(R.id.buttonCreateFlower);
         buttonCreateFlower.setOnClickListener(this);
+        fAdapterList = new FAdapterList(this,myOjctFlower);
 
         Cursor c = db.query(flowerBD, null, null, null, null, null, null);
 
+
+
         if (c.moveToFirst()){
             int idColIndex = c.getColumnIndex("id");
-            int nameColIndex = c.getColumnIndex("name");
-
+            int nameColIndex = c.getColumnIndex("nameFlower");
+            Log.d("TAGN", "rc.getString(nameColIndex) = " + c.getString(nameColIndex));
+            Log.d("TAGN", "c.getInt(idColIndex) = " + c.getInt(idColIndex));
             do{
-                myOjctFlower.add(new CatalogFlower(c.getString(nameColIndex),c.getInt(idColIndex),flowerBD));
+                myOjctFlower.add(new CatalogFlower(c.getString(nameColIndex), c.getInt(idColIndex), flowerBD));
             }while(c.moveToNext());
         }
         else {c.close();}

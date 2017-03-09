@@ -12,6 +12,7 @@ public class CatalogFlower {
     private String bdname;
 
 
+    CatalogFlower(){}
     CatalogFlower(String name,int id, String bdname){
 
         this.name = name;

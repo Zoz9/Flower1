@@ -81,14 +81,14 @@ public class FlowerEditor extends Activity implements View.OnClickListener {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
-
+        bdSupport.close();
 
     }
 
 
     @Override
     public void onClick(View v) {
+        db = bdSupport.getReadableDatabase();
         switch (v.getId()) {
             case R.id.butSaveFl:
                 cv = new ContentValues();
@@ -112,9 +112,11 @@ public class FlowerEditor extends Activity implements View.OnClickListener {
             case R.id.drop:
 
                 db.execSQL("DROP TABLE IF EXISTS flowersstandartdb");
+                //db.delete("flowersstandartdb", null, null);
                 db.execSQL("CREATE TABLE flowersstandartdb (id INTEGER PRIMARY KEY autoincrement, nameFlower TEXT, sizeFlower INTEGER, growthStageFlower TEXT, manufacturerFlower TEXT, collectorFlower TEXT, featuresFlower TEXT);");
                 break;
 
         }
+        bdSupport.close();
     }
 }

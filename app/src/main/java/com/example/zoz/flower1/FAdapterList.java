@@ -18,9 +18,9 @@ public class FAdapterList extends BaseAdapter {
 
     Context ctx;
     LayoutInflater lInfater;
-    ArrayAdapter<CatalogFlower> myOjctFlower;
+    ArrayList<CatalogFlower> myOjctFlower;
 
-    FAdapterList(Context ctx,ArrayAdapter<CatalogFlower> myOjctFlower ){
+    FAdapterList(Context ctx,ArrayList<CatalogFlower> myOjctFlower ){
         this.ctx =ctx;
         this.myOjctFlower = myOjctFlower;
         lInfater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -29,12 +29,12 @@ public class FAdapterList extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return myOjctFlower.getCount();//проверить
+        return myOjctFlower.size();//проверить
     }
 
     @Override
     public Object getItem(int position) {
-        return myOjctFlower.getItem(position);//проверить
+        return myOjctFlower.get(position);//проверить
     }
 
     @Override
@@ -52,7 +52,7 @@ public class FAdapterList extends BaseAdapter {
         CatalogFlower FlowerItem = (CatalogFlower)getItem(position);
 
         ((TextView) view.findViewById(R.id.tvNameFl)).setText(FlowerItem.getName());
-        ((TextView) view.findViewById(R.id.tvIdFl)).setText(FlowerItem.getId());
+        ((TextView) view.findViewById(R.id.tvIdFl)).setText(String.valueOf(FlowerItem.getId()));
 
         return view;
     }
