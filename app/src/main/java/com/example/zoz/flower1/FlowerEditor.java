@@ -3,6 +3,7 @@ package com.example.zoz.flower1;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ public class FlowerEditor extends Activity implements View.OnClickListener {
 
     SQLiteDatabase db;
     String flowerBD;
+    String id_Flower;
     BDSupport bdSupport;
     EditText eTnameFlower;
     EditText eTsizeFlower;
@@ -41,6 +43,8 @@ public class FlowerEditor extends Activity implements View.OnClickListener {
         Intent intent = getIntent();
 
         flowerBD = intent.getStringExtra("bdname");
+        id_Flower = intent.getStringExtra("id_Flower");
+        Log.d("LOGN", " id = " + id_Flower);
         bdSupport = new BDSupport(this,flowerBD,1);
         db = bdSupport.getReadableDatabase();
 
@@ -58,7 +62,8 @@ public class FlowerEditor extends Activity implements View.OnClickListener {
         eTcollectorFlowerFlower = (EditText) findViewById(R.id.eTcollectorFlowerFlower);
         eTfeaturesFlower = (EditText) findViewById(R.id.eTfeaturesFlower);
 
-        // адаптер
+
+        // адаптер выпадающего меню
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -81,6 +86,20 @@ public class FlowerEditor extends Activity implements View.OnClickListener {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
+
+        if(id_Flower!=null){
+            Cursor c = db.query(flowerBD, null, "id="+id_Flower, null, null, null, null);
+            if (c.moveToFirst()) {
+                Log.d("LOGN", " id = " + c.getString(c.getColumnIndex("nameFlower")));
+                eTnameFlower.setText(c.getString(c.getColumnIndex("nameFlower")));
+                eTsizeFlower.setText(c.getString(c.getColumnIndex("sizeFlower")));
+                eTmanufacturerFlower.setText(c.getString(c.getColumnIndex("manufacturerFlower")));
+                eTcollectorFlowerFlower.setText(c.getString(c.getColumnIndex("collectorFlower")));
+                eTfeaturesFlower.setText(c.getString(c.getColumnIndex("featuresFlower")));
+                spinner.setSelection(c.getInt(c.getColumnIndex("growthStageFlower")));
+            }
+        }
+
         bdSupport.close();
 
     }
@@ -105,8 +124,14 @@ public class FlowerEditor extends Activity implements View.OnClickListener {
                 cv.put("collectorFlower", collectorFlower);
                 String featuresFlower = eTfeaturesFlower.getText().toString();
                 cv.put("featuresFlower", featuresFlower);
-                long rowID = db.insert(flowerBD, null, cv);
-                Log.d("TAGN", "row inserted, ID = " + rowID);
+
+                if(id_Flower!=null){
+                    db.update(flowerBD,cv,"id = ?",new String[]{id_Flower});
+                }
+                else {
+                    long rowID = db.insert(flowerBD, null, cv);
+                    Log.d("TAGN", "row inserted, ID = " + rowID);
+                }
                 break;
 
             case R.id.drop:
