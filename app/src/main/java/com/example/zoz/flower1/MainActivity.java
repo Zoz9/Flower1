@@ -43,8 +43,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
 
+            case R.id.calendar_button:
+
+                break;
+
         }
     }
+
 
 
 }

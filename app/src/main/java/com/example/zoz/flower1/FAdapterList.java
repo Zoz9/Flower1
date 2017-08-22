@@ -20,7 +20,7 @@ public class FAdapterList extends BaseAdapter {
     LayoutInflater lInfater;
     ArrayList<CatalogFlower> myOjctFlower;
 
-    FAdapterList(Context ctx,ArrayList<CatalogFlower> myOjctFlower ){
+    public FAdapterList(Context ctx,ArrayList<CatalogFlower> myOjctFlower ){
         this.ctx =ctx;
         this.myOjctFlower = myOjctFlower;
         lInfater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

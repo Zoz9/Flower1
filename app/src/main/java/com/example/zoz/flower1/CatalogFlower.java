@@ -13,7 +13,7 @@ public class CatalogFlower {
 
 
     CatalogFlower(){}
-    CatalogFlower(String name,int id, String bdname){
+    public CatalogFlower(String name,int id, String bdname){
 
         this.name = name;
         this.id = id;
