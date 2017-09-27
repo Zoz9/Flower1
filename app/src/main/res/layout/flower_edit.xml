@@ -1,114 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:weightSum="1">
-
-    <LinearLayout
-        android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="83dp"
-        android:layout_weight="0.16">
-
-        <ImageView
+        android:layout_height="match_parent">
+        <android.support.v4.view.PagerTitleStrip
+            android:id="@+id/pagerTitleStrip"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@android:drawable/btn_star"
-            android:id="@+id/imageView"
-            android:layout_weight="1" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="194dp"
-            android:layout_height="match_parent"
-            android:weightSum="1">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:ems="10"
-                android:id="@+id/eTnameFlower" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/eTsizeFlower"
-                android:text="0" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="134dp"
-        android:weightSum="1">
-
-        <EditText
-            android:layout_width="191dp"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:text="описание"
-            android:ems="10"
-            android:id="@+id/eTfeaturesFlower"
-            android:selectAllOnFocus="false" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.02">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="Селекционер"
-                android:ems="10"
-                android:id="@+id/eTmanufacturerFlower"
-                android:layout_weight="1" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="Коллекционер"
-                android:ems="10"
-                android:id="@+id/eTcollectorFlowerFlower"
-                android:layout_weight="1" />
-
-            <Spinner
-
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:headerDividersEnabled="false"
-                android:footerDividersEnabled="false"
-                android:id="@+id/lWgrowthStageFlower" />
-
-            <!--  выбор стадии роста -->
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:text="Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/butSaveFl"
-        android:layout_weight="0.16" />
-
-    <Button
-        android:text="drop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/drop"
-        android:layout_weight="0.16" />
-
-</LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="top">
+        </android.support.v4.view.PagerTitleStrip>
+    </android.support.v4.view.ViewPager>
+</RelativeLayout>
