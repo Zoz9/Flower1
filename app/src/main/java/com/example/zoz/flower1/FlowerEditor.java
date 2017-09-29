@@ -48,7 +48,7 @@ public class FlowerEditor extends FragmentActivity{
 
         // создаем фрагменты.
         _fragments.add(FRAGMENT_ONE, new PageFragmentFlowerEditorMain());
-        _fragments.add(FRAGMENT_TWO, new PageFragmentFlowerEditorMain());
+        _fragments.add(FRAGMENT_TWO, new PageFragmentFlowerEditorGround());
         _fragments.add(FRAGMENT_THREE, new PageFragmentFlowerEditorMain());
 
         pager = (ViewPager) findViewById(R.id.pager);
