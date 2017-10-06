@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    tools:context=".MainActivity"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="327dp"
+        android:layout_weight="1.05">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.view.PagerTitleStrip
+                android:id="@+id/pagerTitleStrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top">
+            </android.support.v4.view.PagerTitleStrip>
+
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.v4.view.PagerTitleStrip
-            android:id="@+id/pagerTitleStrip"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="Save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top">
-        </android.support.v4.view.PagerTitleStrip>
-    </android.support.v4.view.ViewPager>
-</RelativeLayout>
+            android:onClick="onClicSaveF"
+            android:id="@+id/button"
+            android:elevation="1dp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.List;
+
 
 public class PageFragmentFlowerEditorMain extends Fragment implements View.OnClickListener{
     SQLiteDatabase db;
@@ -33,6 +35,7 @@ public class PageFragmentFlowerEditorMain extends Fragment implements View.OnCli
     String[] data = {"Листик", "Детка", "Стартер", "Взрослое растение", "Не выбрано"};
     ContentValues cv;
     Spinner spinner;
+
     String growthStageFlower;
     private Context context;
 
@@ -67,7 +70,7 @@ public class PageFragmentFlowerEditorMain extends Fragment implements View.OnCli
         // вместо this используем getActivity(). !!! в фрагменте !!!
         db = bdSupport.getReadableDatabase();
 
-        Button butSaveFl;
+        /*Button butSaveFl;
         butSaveFl = (Button) view.findViewById(R.id.butSaveFl);
         //для поиска кнопки надо указывать вбюху view.
         butSaveFl.setOnClickListener(this);
@@ -75,7 +78,7 @@ public class PageFragmentFlowerEditorMain extends Fragment implements View.OnCli
         Button drop;
         drop = (Button) view.findViewById(R.id.drop);
         drop.setOnClickListener(this);
-
+*/
         eTnameFlower = (EditText) view.findViewById(R.id.eTnameFlower);
         eTsizeFlower = (EditText) view.findViewById(R.id.eTsizeFlower);
         eTmanufacturerFlower = (EditText) view.findViewById(R.id.eTmanufacturerFlower);
@@ -130,11 +133,11 @@ public class PageFragmentFlowerEditorMain extends Fragment implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        db = bdSupport.getReadableDatabase();
+/*        db = bdSupport.getReadableDatabase();
         switch (v.getId()) {
             case R.id.butSaveFl:
                 cv = new ContentValues();
-//nameFlower TEXT, sizeFlower INTEGER, growthStageFlower TEXT, manufacturerFlower TEXT, collectorFlower TEXT, featuresFlower TEXT);"
+                //nameFlower TEXT, sizeFlower INTEGER, growthStageFlower TEXT, manufacturerFlower TEXT, collectorFlower TEXT, featuresFlower TEXT);"
                 String nameFlower = eTnameFlower.getText().toString();
                 cv.put("nameFlower", nameFlower);
                 int sizeFlower = Integer.parseInt(eTsizeFlower.getText().toString());
@@ -147,7 +150,6 @@ public class PageFragmentFlowerEditorMain extends Fragment implements View.OnCli
                 cv.put("collectorFlower", collectorFlower);
                 String featuresFlower = eTfeaturesFlower.getText().toString();
                 cv.put("featuresFlower", featuresFlower);
-
                 if(id_Flower!=null){
                     db.update(flowerBD,cv,"id = ?",new String[]{id_Flower});
                 }
@@ -156,15 +158,12 @@ public class PageFragmentFlowerEditorMain extends Fragment implements View.OnCli
                     Log.d("TAGN", "row inserted, ID = " + rowID);
                 }
                 break;
-
-            case R.id.drop:
-
+                case R.id.drop:
                 db.execSQL("DROP TABLE IF EXISTS flowersstandartdb");
                 //db.delete("flowersstandartdb", null, null);
                 db.execSQL("CREATE TABLE flowersstandartdb (id INTEGER PRIMARY KEY autoincrement, nameFlower TEXT, sizeFlower INTEGER, growthStageFlower TEXT, manufacturerFlower TEXT, collectorFlower TEXT, featuresFlower TEXT);");
                 break;
-
         }
-        bdSupport.close();
+        bdSupport.close();*/
     }
 }
