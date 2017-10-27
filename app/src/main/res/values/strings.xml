@@ -4,4 +4,7 @@
     <string name="mini_fl">Мини</string>
     <string name="trailer_fl">Трейлеры</string>
 
+    <string name="choose_date">Выберите дату</string>
+    <string name="ready">Готово</string>
+
 </resources>

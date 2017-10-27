@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -15,19 +16,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
+import com.example.zoz.flower1.Dialogs.DatePicker;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.zoz.flower1.R.id.eTnameFlower;
 import static com.example.zoz.flower1.R.id.eTsizeFlower;
 
-/**
- * Created by Zoz on 21.01.2017.
- */
 
-public class FlowerEditor extends FragmentActivity{
+
+public class FlowerEditor extends FragmentActivity implements DatePicker.ShareDialogListener{
 
     static final String TAG = "myLogs";
     static final int PAGE_COUNT = 3;
@@ -66,7 +69,7 @@ public class FlowerEditor extends FragmentActivity{
         // создаем фрагменты.
         _fragments.add(FRAGMENT_ONE, new PageFragmentFlowerEditorMain());
         _fragments.add(FRAGMENT_TWO, new PageFragmentFlowerEditorGround());
-        _fragments.add(FRAGMENT_THREE, new PageFragmentFlowerEditorMain());
+        _fragments.add(FRAGMENT_THREE, new PageFragmentFlowerEditorWatering());
         Intent intent = getIntent();
         // в фрагменте для интента надо юзать getActivity()
 
@@ -93,7 +96,7 @@ public class FlowerEditor extends FragmentActivity{
             }
         };
         pager.setAdapter(_fragmentPagerAdapter);
-
+        pager.setOffscreenPageLimit(3);
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -113,42 +116,33 @@ public class FlowerEditor extends FragmentActivity{
     }
 
     public void onClicSaveF(View view) {
-        bdSupport = new BDSupport(this,flowerBD,1);
-        db = bdSupport.getReadableDatabase();
-        ContentValues cv = new ContentValues();
-        EditText eTnameFlower = (EditText) findViewById(R.id.eTnameFlower);
-        EditText eTsizeFlower = (EditText) findViewById(R.id.eTsizeFlower);
-        EditText eTmanufacturerFlower = (EditText) findViewById(R.id.eTmanufacturerFlower);
-        EditText eTcollectorFlowerFlower = (EditText) findViewById(R.id.eTcollectorFlowerFlower);
-        EditText eTfeaturesFlower = (EditText) findViewById(R.id.eTfeaturesFlower);
-        Spinner spinner = (Spinner) findViewById(R.id.lWgrowthStageFlower);
-
-//nameFlower TEXT, sizeFlower INTEGER, growthStageFlower TEXT, manufacturerFlower TEXT, collectorFlower TEXT, featuresFlower TEXT);"
-        String nameFlower = eTnameFlower.getText().toString();
-        cv.put("nameFlower", nameFlower);
-        int sizeFlower = Integer.parseInt(eTsizeFlower.getText().toString());
-        cv.put("sizeFlower", sizeFlower);
-        String growthStageFlower = spinner.getSelectedItemPosition()+"";
-        cv.put("growthStageFlower", growthStageFlower);
-        String manufacturerFlower = eTmanufacturerFlower.getText().toString();
-        cv.put("manufacturerFlower", manufacturerFlower);
-        String collectorFlower = eTcollectorFlowerFlower.getText().toString();
-        cv.put("collectorFlower", collectorFlower);
-        String featuresFlower = eTfeaturesFlower.getText().toString();
-        cv.put("featuresFlower", featuresFlower);
-
+        PageFragmentFlowerEditorWatering fragment2 = (PageFragmentFlowerEditorWatering) _fragments.get(FRAGMENT_THREE);
         PageFragmentFlowerEditorGround fragment = (PageFragmentFlowerEditorGround) _fragments.get(FRAGMENT_TWO);
+        PageFragmentFlowerEditorMain fragment1 = (PageFragmentFlowerEditorMain) _fragments.get(FRAGMENT_ONE);
 
         if(id_Flower!=null){
-            db.update(flowerBD,cv,"id = ?",new String[]{id_Flower});
+            fragment1.saveMain();
             fragment.SaveGrond(Integer.parseInt(id_Flower));
+            fragment2.saveWatering(Integer.parseInt(id_Flower));
         }
         else {
-            long rowID = db.insert(flowerBD, null, cv);
+            long rowID = fragment1.saveMain();
             Log.d("TAGN", "row inserted, ID = " + rowID);
             fragment.SaveGrond((int)rowID);
+            fragment2.saveWatering((int)rowID);
 
         }
-        bdSupport.close();
+
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog, int year, int month, int day) throws ParseException {
+        PageFragmentFlowerEditorWatering fragment2 = (PageFragmentFlowerEditorWatering) _fragments.get(FRAGMENT_THREE);
+        fragment2.TextSet(day+"."+month+"."+year);
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 }

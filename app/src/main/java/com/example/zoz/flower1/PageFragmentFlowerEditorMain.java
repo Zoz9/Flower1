@@ -131,6 +131,34 @@ public class PageFragmentFlowerEditorMain extends Fragment implements View.OnCli
         return view;
     }
 
+    public int saveMain(){
+        db = bdSupport.getReadableDatabase();
+        long rowID;
+        cv = new ContentValues();
+        //nameFlower TEXT, sizeFlower INTEGER, growthStageFlower TEXT, manufacturerFlower TEXT, collectorFlower TEXT, featuresFlower TEXT);"
+        String nameFlower = eTnameFlower.getText().toString();
+        cv.put("nameFlower", nameFlower);
+        int sizeFlower = Integer.parseInt(eTsizeFlower.getText().toString());
+        cv.put("sizeFlower", sizeFlower);
+        String growthStageFlower = spinner.getSelectedItemPosition()+"";
+        cv.put("growthStageFlower", growthStageFlower);
+        String manufacturerFlower = eTmanufacturerFlower.getText().toString();
+        cv.put("manufacturerFlower", manufacturerFlower);
+        String collectorFlower = eTcollectorFlowerFlower.getText().toString();
+        cv.put("collectorFlower", collectorFlower);
+        String featuresFlower = eTfeaturesFlower.getText().toString();
+        cv.put("featuresFlower", featuresFlower);
+        if(id_Flower!=null){
+            db.update(flowerBD,cv,"id = ?",new String[]{id_Flower});
+            rowID = Integer.parseInt(id_Flower);
+        }
+        else {
+            rowID = db.insert(flowerBD, null, cv);
+            Log.d("TAGN", "row inserted, ID = " + rowID);
+        }
+        bdSupport.close();
+        return (int)rowID;
+    }
     @Override
     public void onClick(View v) {
 /*        db = bdSupport.getReadableDatabase();

@@ -20,6 +20,7 @@ public class BDSupport extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE flowersminidb (id INTEGER PRIMARY KEY autoincrement, nameFlower TEXT, sizeFlower INTEGER, growthStageFlower TEXT, manufacturerFlower TEXT, collectorFlower TEXT, featuresFlower TEXT);");
         db.execSQL("CREATE TABLE flowerstrailerdb (id INTEGER PRIMARY KEY autoincrement, nameFlower TEXT, sizeFlower INTEGER, growthStageFlower TEXT, manufacturerFlower TEXT, collectorFlower TEXT, featuresFlower TEXT);");
         db.execSQL("CREATE TABLE grounddb (id INTEGER PRIMARY KEY autoincrement, idFlower INTEGER, grounFlower TEXT)");
+        db.execSQL("CREATE TABLE wateringdb (id INTEGER PRIMARY KEY autoincrement, idFlower INTEGER, dateLastWatering DATE, datePeriodWatering DATE, dateLastGround DATE, dateNextWatering DATE)");
 
     }
 
