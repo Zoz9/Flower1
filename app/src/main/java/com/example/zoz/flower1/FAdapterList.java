@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 /**
  * Created by Zoz on 29.01.2017.
- */
+ */ 
 
 public class FAdapterList extends BaseAdapter {
 
