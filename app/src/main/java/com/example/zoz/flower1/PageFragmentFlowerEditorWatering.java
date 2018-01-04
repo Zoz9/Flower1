@@ -1,7 +1,9 @@
 package com.example.zoz.flower1;
 
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.*;
 import android.widget.EditText;
@@ -25,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class PageFragmentFlowerEditorWatering extends Fragment implements View.OnClickListener, DatePicker.ShareDialogListener {
+public class PageFragmentFlowerEditorWatering extends Fragment implements View.OnClickListener, DatePicker.ShareDialogListener , NumPicke.ShareNumberDialogListener{
 
     TextView dateLastWatering;
     TextView datePeriodWatering;
@@ -45,7 +48,7 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
                 PickerDialog(v);
                 break;
             case R.id.datePeriodWatering:
-                PickerDialog(v);
+                NumPickerDialog(v);
                 break;
             case R.id.dateLastGround:
                 PickerDialog(v);
@@ -136,5 +139,25 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
             Log.d("LOGN",""+ids + dateLastWateringT+dateLastGroundT+datePeriodWateringT);
         }
         bdSupport.close();
+    }
+
+    public void NumPickerDialog(View v)
+    {
+        NumPicke numberDialog = new NumPicke();
+        numberDialog.show(getFragmentManager(), "datePicker");
+        // в фрагменте надо юзать getFragmentManager вместо getSupportFragmentManager
+        TT =  (TextView)getActivity().findViewById(v.getId());
+    }
+
+
+
+    @Override
+    public void onNumberDialogPositiveClick(DialogInterface dialog, int num) {
+        TextSet(Integer.toString(num));
+    }
+
+    @Override
+    public void onNumberDialogNegativeClick(DialogInterface dialog, int which) {
+
     }
 }

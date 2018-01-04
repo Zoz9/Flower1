@@ -2,6 +2,7 @@ package com.example.zoz.flower1;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.DialogFragment;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 
 import com.example.zoz.flower1.Dialogs.DatePicker;
+import com.example.zoz.flower1.Dialogs.NumPicke;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ import static com.example.zoz.flower1.R.id.eTsizeFlower;
 
 
 
-public class FlowerEditor extends FragmentActivity implements DatePicker.ShareDialogListener{
+public class FlowerEditor extends FragmentActivity implements DatePicker.ShareDialogListener, NumPicke.ShareNumberDialogListener{
 
     static final String TAG = "myLogs";
     static final int PAGE_COUNT = 3;
@@ -143,6 +145,17 @@ public class FlowerEditor extends FragmentActivity implements DatePicker.ShareDi
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onNumberDialogPositiveClick(DialogInterface dialog, int num) {
+        PageFragmentFlowerEditorWatering fragment2 = (PageFragmentFlowerEditorWatering) _fragments.get(FRAGMENT_THREE);
+        fragment2.TextSet(Integer.toString(num));
+    }
+
+    @Override
+    public void onNumberDialogNegativeClick(DialogInterface dialog, int which) {
 
     }
 }
