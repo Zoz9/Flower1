@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class PageFragmentFlowerEditorWatering extends Fragment implements View.OnClickListener, DatePicker.ShareDialogListener , NumPicke.ShareNumberDialogListener{
+public class PageFragmentFlowerEditorWatering extends Fragment implements View.OnClickListener, DatePicker.ShareDialogListener {
 
     TextView dateLastWatering;
     TextView datePeriodWatering;
@@ -39,6 +39,8 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
     SQLiteDatabase db;
     BDSupport bdSupport;
     ContentValues cv;
+    View cvv;
+    CalendarView cvv2;
     DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy", Locale.US);
     @Override
     public void onClick(View v) {
@@ -67,9 +69,10 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
 
         final View view = inflater.inflate(R.layout.fragment_watering_edit, container, false);
         Intent intent = getActivity().getIntent();
-        View cv = view.findViewById(R.id.calendar_view);
-        //  CalendarView cv = ((CalendarView)findViewById(R.id.calendar_view));
-        // В фрагменте  View cv = view.findViewById(R.id.calendar_view);
+        cvv = view.findViewById(R.id.calendar_view);
+        //cvv2 = ((CalendarView) view.findViewById(R.id.calendar_view));
+        //  CalendarView cvv = ((CalendarView)findViewById(R.id.calendar_view));
+        // В фрагменте  View cvv = view.findViewById(R.id.calendar_view);
         dateLastWatering = (TextView) view.findViewById(R.id.dateLastWatering);
         dateLastWatering.setOnClickListener(this);
         datePeriodWatering = (TextView) view.findViewById(R.id.datePeriodWatering);
@@ -92,6 +95,9 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
         bdSupport.close();
         return view;
 
+    }
+    public void CalendarSetDay(int days){
+        cvv.up
     }
 
     public void PickerDialog(View v) {
@@ -151,13 +157,4 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
 
 
 
-    @Override
-    public void onNumberDialogPositiveClick(DialogInterface dialog, int num) {
-        TextSet(Integer.toString(num));
-    }
-
-    @Override
-    public void onNumberDialogNegativeClick(DialogInterface dialog, int which) {
-
-    }
 }

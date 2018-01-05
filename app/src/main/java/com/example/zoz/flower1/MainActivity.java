@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.zoz.flower1.CalendarW.CalendarActivity;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button standart_Fl_B, mini_Fl_B, trailer_Fl_B;
@@ -31,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+
+
+
             case R.id.standart_button:
             Intent intent = new Intent(this, ListOfFlower.class);
             intent.putExtra("bdname", "flowersstandartdb");
@@ -44,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.calendar_button:
+                intent = new Intent(this, CalendarActivity.class);
+                intent.putExtra("bdname", "flowersstandartdb");
+                startActivity(intent);
 
                 break;
 
