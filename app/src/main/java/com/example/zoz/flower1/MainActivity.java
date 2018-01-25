@@ -11,7 +11,7 @@ import com.example.zoz.flower1.CalendarW.CalendarActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Button standart_Fl_B, mini_Fl_B, trailer_Fl_B;
+    Button standart_Fl_B, mini_Fl_B, trailer_Fl_B, calendar_button_b;
 
 
     @Override
@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         trailer_Fl_B = (Button) findViewById(R.id.trailer_button);
         trailer_Fl_B.setOnClickListener(this);
+
+        calendar_button_b = (Button) findViewById(R.id.calendar_button);
+        calendar_button_b.setOnClickListener(this);
     }
 
     @Override
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.calendar_button:
                 intent = new Intent(this, CalendarActivity.class);
-                intent.putExtra("bdname", "flowersstandartdb");
+                intent.putExtra("bdname", "wateringdb");
                 startActivity(intent);
 
                 break;

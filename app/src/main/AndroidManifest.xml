@@ -16,11 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListOfFlower">
-
         </activity>
         <activity android:name=".FlowerEditor">
-
         </activity>
+        <activity android:name=".CalendarW.CalendarActivity"></activity>
     </application>
 
 </manifest>

@@ -78,13 +78,14 @@ public class CalendarAdapter extends ArrayAdapter<Date>
             // if this day is outside current month, grey it out
             ((TextView)view).setTextColor(getContext().getResources().getColor(R.color.greyed_out));
         }
+        /*
         else if (day == today.getDate())
         {
             // if it is today, set it to blue/bold
             ((TextView)view).setTypeface(null, Typeface.BOLD);
             ((TextView)view).setTextColor(getContext().getResources().getColor(R.color.today));
         }
-
+*/
         // set text
         ((TextView)view).setText(String.valueOf(date.getDate()));
 

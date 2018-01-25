@@ -26,6 +26,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class PageFragmentFlowerEditorWatering extends Fragment implements View.OnClickListener, DatePicker.ShareDialogListener {
@@ -69,7 +71,9 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
 
         final View view = inflater.inflate(R.layout.fragment_watering_edit, container, false);
         Intent intent = getActivity().getIntent();
+
         cvv = view.findViewById(R.id.calendar_view);
+        cvv2 = (CalendarView) view.findViewById(R.id.calendar_view);
         //cvv2 = ((CalendarView) view.findViewById(R.id.calendar_view));
         //  CalendarView cvv = ((CalendarView)findViewById(R.id.calendar_view));
         // В фрагменте  View cvv = view.findViewById(R.id.calendar_view);
@@ -97,7 +101,7 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
 
     }
     public void CalendarSetDay(int days){
-        cvv.up
+
     }
 
     public void PickerDialog(View v) {
@@ -122,7 +126,28 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
 
     }
 
-    public void saveWatering(int ids){
+    public String PickeDateNextWatering(String dateLastWatering, String datePeriodWatering)  {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar c = Calendar.getInstance();
+        Date date = null;
+        try {
+            c.setTime(sdf.parse(dateLastWatering));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.add(Calendar.DATE, Integer.parseInt(datePeriodWatering));
+        try {
+            date = sdf.parse(c.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String Dc = sdf.format(c.getTime()).toString();
+        Log.d("LogN", Dc);
+        return Dc;
+    }
+
+
+    public void saveWatering(int ids) {
         bdSupport = new BDSupport(getActivity(),"wateringdb",1);
         db = bdSupport.getReadableDatabase();
         cv = new ContentValues();
@@ -132,6 +157,7 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
         cv.put("dateLastGround", dateLastGroundT);
         String datePeriodWateringT = datePeriodWatering.getText().toString();
         cv.put("datePeriodWatering", datePeriodWateringT);
+        cv.put("dateNextWatering",PickeDateNextWatering(dateLastWateringT,datePeriodWateringT));
         if(id_Flower!=null){
             db.update("wateringdb",cv,"idFlower = ?",new String[]{id_Flower});
             //fragment.SaveGrond(Integer.parseInt(id_Flower));

@@ -117,7 +117,7 @@ public class FlowerEditor extends FragmentActivity implements DatePicker.ShareDi
         });
     }
 
-    public void onClicSaveF(View view) {
+    public void onClicSaveF(View view) throws ParseException {
         PageFragmentFlowerEditorWatering fragment2 = (PageFragmentFlowerEditorWatering) _fragments.get(FRAGMENT_THREE);
         PageFragmentFlowerEditorGround fragment = (PageFragmentFlowerEditorGround) _fragments.get(FRAGMENT_TWO);
         PageFragmentFlowerEditorMain fragment1 = (PageFragmentFlowerEditorMain) _fragments.get(FRAGMENT_ONE);
@@ -138,8 +138,9 @@ public class FlowerEditor extends FragmentActivity implements DatePicker.ShareDi
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog, int year, int month, int day) throws ParseException {
+    public void onDialogPositiveClick(DialogFragment dialog, int year, int month, int day) {
         PageFragmentFlowerEditorWatering fragment2 = (PageFragmentFlowerEditorWatering) _fragments.get(FRAGMENT_THREE);
+        month = month+1;
         fragment2.TextSet(day+"."+month+"."+year);
     }
 
