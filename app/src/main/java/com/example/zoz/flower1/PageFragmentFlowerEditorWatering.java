@@ -19,6 +19,7 @@ import android.widget.*;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.zoz.flower1.CalendarW.*;
 import com.example.zoz.flower1.Dialogs.*;
 import com.example.zoz.flower1.Dialogs.DatePicker;
 
@@ -28,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
 
 public class PageFragmentFlowerEditorWatering extends Fragment implements View.OnClickListener, DatePicker.ShareDialogListener {
@@ -42,8 +44,11 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
     BDSupport bdSupport;
     ContentValues cv;
     View cvv;
-    CalendarView cvv2;
+    Date dt;
+    HashSet<Date> events;
+    com.example.zoz.flower1.CalendarW.CalendarView cvv2;
     DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy", Locale.US);
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -72,17 +77,25 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
         final View view = inflater.inflate(R.layout.fragment_watering_edit, container, false);
         Intent intent = getActivity().getIntent();
 
-        cvv = view.findViewById(R.id.calendar_view);
-        cvv2 = (CalendarView) view.findViewById(R.id.calendar_view);
-        //cvv2 = ((CalendarView) view.findViewById(R.id.calendar_view));
-        //  CalendarView cvv = ((CalendarView)findViewById(R.id.calendar_view));
+        //cvv = view.findViewById(R.id.calendar_view);
+        cvv2 = (com.example.zoz.flower1.CalendarW.CalendarView) view.findViewById(R.id.calendar_view);
+
+        //текущая дата
+        Calendar calendar2 = Calendar.getInstance();
+        int MONTH= calendar2.get(Calendar.MONTH);
+        MONTH= MONTH+1;
+        //
         // В фрагменте  View cvv = view.findViewById(R.id.calendar_view);
+        events = new HashSet<>();
         dateLastWatering = (TextView) view.findViewById(R.id.dateLastWatering);
         dateLastWatering.setOnClickListener(this);
+        dateLastWatering.setText("" +calendar2.get(Calendar.DATE)+" "+MONTH+" "+calendar2.get(Calendar.YEAR));
         datePeriodWatering = (TextView) view.findViewById(R.id.datePeriodWatering);
         datePeriodWatering.setOnClickListener(this);
+        datePeriodWatering.setText("1");
         dateLastGround = (TextView) view.findViewById(R.id.dateLastGround);
         dateLastGround.setOnClickListener(this);
+        dateLastGround.setText("" +calendar2.get(Calendar.DATE)+" "+MONTH+" "+calendar2.get(Calendar.YEAR));
         listOfdateWatering = (ListView) view.findViewById(R.id.listOfdateWatering);
         id_Flower = intent.getStringExtra("id_Flower");
         bdSupport = new BDSupport(getActivity(),"wateringdb",1);
@@ -100,9 +113,30 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
         return view;
 
     }
-    public void CalendarSetDay(int days){
+    public void CalendarSetDay(int days) {
+        String dateLastWateringT = dateLastWatering.getText().toString();
+        //dt = sdf.parse(dateLastWateringT);
+        events.clear();
 
-    }
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(sdf.parse(dateLastWateringT));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int i=20;
+        while (i<1){
+            calendar.add(Calendar.DATE, days);
+            sdf.format(calendar.getTime());
+            events.add(calendar.getTime());
+            i--;
+        }
+
+         cvv2.updateCalendar(events);
+}
+
+
+
 
     public void PickerDialog(View v) {
         DialogFragment dateDialog = new DatePicker();
@@ -143,6 +177,7 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
         }
         String Dc = sdf.format(c.getTime()).toString();
         Log.d("LogN", Dc);
+
         return Dc;
     }
 

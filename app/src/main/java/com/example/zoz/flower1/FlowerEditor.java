@@ -153,6 +153,7 @@ public class FlowerEditor extends FragmentActivity implements DatePicker.ShareDi
     public void onNumberDialogPositiveClick(DialogInterface dialog, int num) {
         PageFragmentFlowerEditorWatering fragment2 = (PageFragmentFlowerEditorWatering) _fragments.get(FRAGMENT_THREE);
         fragment2.TextSet(Integer.toString(num));
+        fragment2.CalendarSetDay(num);
     }
 
     @Override
