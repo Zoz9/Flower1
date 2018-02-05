@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.zoz.flower1.CalendarW.CalendarActivity;
+import com.example.zoz.flower1.Services.MyServiceTest;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        startService(new Intent(this, MyServiceTest.class));
         standart_Fl_B = (Button) findViewById(R.id.standart_button);
         standart_Fl_B.setOnClickListener(this);
 

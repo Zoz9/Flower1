@@ -20,6 +20,9 @@
         <activity android:name=".FlowerEditor">
         </activity>
         <activity android:name=".CalendarW.CalendarActivity"></activity>
+        <service android:name=".Services.MyServiceTest">
+
+        </service>
     </application>
 
 </manifest>

@@ -51,8 +51,8 @@ public class FAdapterList extends BaseAdapter {
         }
         CatalogFlower FlowerItem = (CatalogFlower)getItem(position);
 
-        ((TextView) view.findViewById(R.id.tvNameFl)).setText(FlowerItem.getName());
-        ((TextView) view.findViewById(R.id.tvIdFl)).setText(String.valueOf(FlowerItem.getId()));
+        ((TextView) view.findViewById(R.id.tvNameFl)).setText(" "+FlowerItem.getName());
+        ((TextView) view.findViewById(R.id.tvIdFl)).setText(String.valueOf(" "+FlowerItem.getId()));
 
         return view;
     }
