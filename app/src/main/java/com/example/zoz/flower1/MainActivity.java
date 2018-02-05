@@ -47,8 +47,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.mini_button:
-                intent = new Intent(this, FlowerEditor.class);
-                intent.putExtra("bdname", "flowersstandartdb");
+                intent = new Intent(this, ListOfFlower.class);
+                intent.putExtra("bdname", "flowersminidb");
+                startActivity(intent);
+                break;
+
+            case R.id.trailer_button:
+                intent = new Intent(this, ListOfFlower.class);
+                intent.putExtra("bdname", "flowerstrailerdb");
                 startActivity(intent);
                 break;
 

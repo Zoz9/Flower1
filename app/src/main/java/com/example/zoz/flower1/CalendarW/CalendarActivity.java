@@ -43,7 +43,7 @@ public class CalendarActivity extends ActionBarActivity
         setContentView(R.layout.calendar);
 
         HashSet<Date> events = new HashSet<>();
-        events.add(new Date());
+        //events.add(new Date());
         //bd data
         bdSupport = new BDSupport(this,"wateringdb",1);
         db = bdSupport.getReadableDatabase();
@@ -83,7 +83,7 @@ public class CalendarActivity extends ActionBarActivity
                     //Log.d("TAGN", "sdf.parse(c.getString(nameColIndex)) = " + (Date)df.parse(c.getString(nameColIndex)));
                     String[] p = c.getString(dateNextWateringColIndex).split(" ");
                     dt = sdf2.parse(c.getString(dateNextWateringColIndex));//p[0]+" "+p[1]+" "+p[2]+" "+p[5]);
-                    myOjctFlower.add(new CatalogFlower(p[0],c.getInt(idColIndex), "flowersstandartdb"));
+                    myOjctFlower.add(new CatalogFlower(p[0],c.getInt(idColIndex),null));
                             //p[0]+" "+p[1]+" "+p[2]+" "+p[5], c.getInt(idColIndex), "flowersstandartdb"));
                     events.add(dt);
                 } catch (ParseException e) {
