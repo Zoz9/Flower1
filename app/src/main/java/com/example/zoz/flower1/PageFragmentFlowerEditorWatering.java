@@ -34,6 +34,7 @@ import java.util.Locale;
 
 public class PageFragmentFlowerEditorWatering extends Fragment implements View.OnClickListener, DatePicker.ShareDialogListener {
 
+    String flowerBD;
     TextView dateLastWatering;
     TextView datePeriodWatering;
     TextView dateLastGround;
@@ -97,11 +98,12 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
         dateLastGround.setOnClickListener(this);
         dateLastGround.setText("" +calendar2.get(Calendar.DATE)+" "+MONTH+" "+calendar2.get(Calendar.YEAR));
         listOfdateWatering = (ListView) view.findViewById(R.id.listOfdateWatering);
+        flowerBD = intent.getStringExtra("bdname");
         id_Flower = intent.getStringExtra("id_Flower");
         bdSupport = new BDSupport(getActivity(),"wateringdb",1);
         db = bdSupport.getReadableDatabase();
         if(id_Flower!=null){
-            Cursor c = db.query("wateringdb", null, "idFlower="+id_Flower, null, null, null, null);
+            Cursor c = db.query("wateringdb", null, "idFlower = ? AND flowerDB = ?",new String[]{id_Flower,flowerBD}, null, null, null, null);
             if (c.moveToFirst()) {
 
                 dateLastWatering.setText(c.getString(c.getColumnIndex("dateLastWatering")));
@@ -193,13 +195,15 @@ public class PageFragmentFlowerEditorWatering extends Fragment implements View.O
         String datePeriodWateringT = datePeriodWatering.getText().toString();
         cv.put("datePeriodWatering", datePeriodWateringT);
         cv.put("dateNextWatering",PickeDateNextWatering(dateLastWateringT,datePeriodWateringT));
+        cv.put("flowerDB",flowerBD);
         if(id_Flower!=null){
-            db.update("wateringdb",cv,"idFlower = ?",new String[]{id_Flower});
+            db.update("wateringdb",cv,"idFlower = ? AND flowerDB = ?",new String[]{id_Flower,flowerBD});
             //fragment.SaveGrond(Integer.parseInt(id_Flower));
             Log.d("LOGN",id_Flower + dateLastWateringT+dateLastGroundT+datePeriodWateringT);
         }
         else {
             cv.put("idFlower",ids);
+            cv.put("flowerDB",flowerBD);
             long rowID = db.insert("wateringdb", null, cv);
             //Log.d("TAGN", "row inserted, ID = " + rowID);
             //fragment.SaveGrond((int)rowID);

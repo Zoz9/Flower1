@@ -22,6 +22,7 @@ import java.util.List;
 public class PageFragmentFlowerEditorGround extends Fragment implements View.OnClickListener {
     private Context context;
     Button addButton;
+    String flowerBD;
     Button delButton;
     //находим наш linear который у нас под кнопкой add edittext в activity_main.xml
     LinearLayout linear;
@@ -59,12 +60,13 @@ public class PageFragmentFlowerEditorGround extends Fragment implements View.OnC
         cv.put("grounFlower",iemText);
         if(id_Flower!=null){
 
-            db.update("grounddb",cv,"idFlower = ?",new String[]{id_Flower});
+            db.update("grounddb",cv,"idFlower = ? AND flowerDB = ?",new String[]{id_Flower,flowerBD});
             //fragment.SaveGrond(Integer.parseInt(id_Flower));
             Log.d("LOGN",id_Flower + iemText);
         }
         else {
             cv.put("idFlower",ids);
+            cv.put("flowerDB",flowerBD);
               long rowID = db.insert("grounddb", null, cv);
             //Log.d("TAGN", "row inserted, ID = " + rowID);
             //fragment.SaveGrond((int)rowID);
@@ -144,11 +146,12 @@ public class PageFragmentFlowerEditorGround extends Fragment implements View.OnC
         linear = (LinearLayout) view.findViewById(R.id.linear);
         addButton = (Button) view.findViewById(R.id.buttonAddEdittext);
         addButton.setOnClickListener(this);
+        flowerBD = intent.getStringExtra("bdname");
         id_Flower = intent.getStringExtra("id_Flower");
         bdSupport = new BDSupport(getActivity(),"grounddb",1);
         db = bdSupport.getReadableDatabase();
         if(id_Flower!=null){
-            Cursor c = db.query("grounddb", null, "idFlower="+id_Flower, null, null, null, null);
+            Cursor c = db.query("grounddb", null, "idFlower = ? AND flowerDB = ?",new String[]{id_Flower,flowerBD}, null, null, null, null);
             if (c.moveToFirst()) {
                 Log.d("LOGN", " grounFlower = " + c.getString(c.getColumnIndex("grounFlower")));
                 String s = c.getString(c.getColumnIndex("grounFlower"));
